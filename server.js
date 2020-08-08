@@ -18,12 +18,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set("view engine", "pug");
 
-mongo.connect(process.env.DATABASE, { useUnifiedTopology: true }, (err, db) => {
+mongo.connect(process.env.DATABASE, { useUnifiedTopology: true }, (err, client) => {
   if (err) {
     console.log("Database error: " + err);
   } else {
     console.log("Successful database connection");
-
+    let db = client.db('advancednode')
     app.use(
       session({
         secret: process.env.SESSION_SECRET,
